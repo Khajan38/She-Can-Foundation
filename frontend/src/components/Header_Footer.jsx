@@ -1,7 +1,11 @@
 import './../CSS/Header_Footer.css';
 import logo from './../assets/logo.avif';
 import user from './../assets/User.jpeg';
-import homeBackground from './../assets/home-background.avif';
+import homeBackground0 from './../assets/Slideshow/home-background-0.jpeg';
+import homeBackground1 from './../assets/Slideshow/home-background-1.jpeg';
+import homeBackground2 from './../assets/Slideshow/home-background-2.jpeg';
+import homeBackground3 from './../assets/Slideshow/home-background-3.jpeg';
+import homeBackground4 from './../assets/Slideshow/home-background-4.jpeg';
 import footerImage from './../assets/footer-background.avif';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +16,9 @@ const Header = ({ section }) => {
   const [error, setError] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const [count, setCount] = useState(1);
   const navigate = useNavigate();
+  const homeBackgrounds = [ homeBackground0, homeBackground1, homeBackground2, homeBackground3, homeBackground4];
 
   const handleLogoutClick = () => {
     setError("Logging Out...");
@@ -26,7 +32,10 @@ const Header = ({ section }) => {
       setError("Error during Logout");
     }
   };
-
+  useEffect(() => {
+    const slideshow = () =>{setInterval(() => {setCount(prevCount => (prevCount + 1) % 5);}, 10000);}; slideshow();
+    return () => clearInterval(slideshow);
+  }, [])
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -43,7 +52,7 @@ const Header = ({ section }) => {
         </>
       )}
       <div className="hero-section">
-        <img className="home-background" src={homeBackground} alt="Home Background"/>
+        <img className="home-background" src={homeBackgrounds[count]} alt="Home Background"/>
         {/* Navbar */}
         <div className={`header ${isScrolled ? "scrolled" : ""}`}>
           <img className="logo" src={logo} alt="App Logo" />
