@@ -82,9 +82,9 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-up">
         <div className="footer-content">
-          <p className="pFirst">Get in touch</p>
-          <p className="pSecond">Email: president@shecanfoundation.org</p>
-          <p className="pSecond">Contact: +91-8283841830</p>
+          <div className="pFirst">Get in touch</div>
+          <div className="pSecond"> Email: <a href="mailto:president@shecanfoundation.org">president@shecanfoundation.org</a></div>
+          <div className="pSecond"> Contact: <a href="tel:+918283841830">+91-8283841830</a></div>
         </div>
         <img className="footer-background" src={footerImage} alt="Footer Background"/>
       </div>

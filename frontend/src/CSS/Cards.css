@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Lora:ital,wght@0,400;1,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
 
 /*----------------------------------MAIN CONTAINER-----------------------------------*/
 .dashboard-grid {
@@ -16,9 +17,9 @@
   background-color: #efefef;
 }
 .dashboard-grid h2{
-  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-family: "Merriweather", Cambria, serif;
   font-size: 35px;
-  text-decoration: underline;
   font-weight: bolder;
 }
 /*-------------------------------------STAT CARDS------------------------------------*/
