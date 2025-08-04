@@ -1,0 +1,63 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Lora:ital,wght@0,400;1,400&display=swap");
+
+/*----------------------------------MAIN CONTAINER-----------------------------------*/
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #efefef;
+}
+.dashboard-grid h2{
+  font-family: "Poppins", sans-serif;
+  font-size: 35px;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+/*-------------------------------------STAT CARDS------------------------------------*/
+.cards-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex: 1 1 300px;
+  max-width: 300px;
+}
+.stat-info {
+  padding: 1.5rem;
+}
+.stat-label {
+  font-family: 'Great Vibes', cursive;
+  color: #6b7280;
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin: 0;
+}
+.stat-value {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+.stat-icon {
+  width: 100px;
+  height: auto;
+  margin: 0px 15px;
+}

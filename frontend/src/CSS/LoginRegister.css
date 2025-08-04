@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Lora:ital,wght@0,400;1,400&display=swap");
+
+/*-------------------------Main container for the whole page--------------------------*/
+.container { 
+  position: relative;
+  min-width: 100vh;
+  min-height: 100vh;
+  background-color: #ffcccc;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+.container.active .form-box {
+  right: 60%;
+}
+.container.active .form-box.register {
+  visibility: visible;
+}
+.container p {
+  font-size: 14.5px;
+  margin: 15px 0;
+}
+.container h1 {
+  font-size: 50px;
+  margin: 20px 0;
+  font-family: 'Great Vibes', cursive;
+  color: #ed0707;
+}
+.container h2 {
+  font-size: 26px;
+  margin: 10px 0;
+}
+
+/*-------------------------------------Form Box Part----------------------------------*/
+.form-box {
+  position: absolute;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  z-index: 1;
+  transition: 0s ease-in-out 1.2s, visibility 0s 1s;
+}
+.form-box.register {
+  line-height: 1.5;
+  visibility: hidden;
+}
+.container.active .form-box.login {
+  visibility: hidden;
+}
+.container.active .form-box.register {
+  visibility: visible;
+  left: 0;
+}
+
+.form-box form {
+  width: 100%;
+}
+.form-box .input-box {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.form-box .input-box button{
+  flex-shrink: 0;
+  height: 45px;
+  width: 95px;
+}
+.form-box .input-box span {
+  flex-shrink: 0;
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  color: #1d1d1d;
+  font-weight: 400;
+  padding: 8px 10px;
+  font-size: 20px;
+  min-width: 45px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-box .input-box input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 13px 13px 20px;
+  background:  #ffe6e6;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+.form-box .input-box input::placeholder {
+  color: #888;
+  font-weight: 400;
+}
+.form-box .input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+/*-------------------------------------Buttons Part-----------------------------------*/
+
+.btn {
+  width: 100%;
+  height: 48px;
+  background-color: #ED0707;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  background-color: black;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+.btn:disabled{
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.btn:disabled:hover {
+  background-color: #ED0707;
+  box-shadow: none;
+}
+
+.login-btn, .register-btn {
+  border: none;
+  background-color: transparent;
+  color: blue;
+  font-size: 16px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.login-btn:hover, .register-btn:hover {
+  color: #ED0707;
+}
+
+/*------------------------------------Toggle Section----------------------------------*/
+.toggle-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle-box::before {
+  content: "";
+  position: absolute;
+  left: -190%;
+  width: 250%;
+  height: 100%;
+  background: url('./../assets/login-background.avif') repeat-x center;
+  background-size: auto 100%;
+  border-radius: 150px;
+  z-index: 2;
+  transition: left 1.8s ease-in-out;
+}
+
+.container.active .toggle-box::before {
+  left: +40%;
+}
+
+.toggle-panel {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  overflow: hidden;
+  transition: all 1.8s ease-in-out;
+}
+
+.toggle-panel.toggle-left {
+  left: 0;
+}
+
+.container.active .toggle-panel.toggle-left {
+  left: -60%;
+}
+
+.toggle-panel.toggle-right {
+  right: -60%;
+}
+
+.container.active .toggle-panel.toggle-right {
+  right: 0;
+}
+
+.toggle-panel span {
+  font-size: 90px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ED0707
+}
+
+.toggle-panel span.small {
+  font-size: 18px;
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  font-weight: 400;
+  color: #fff;
+}
