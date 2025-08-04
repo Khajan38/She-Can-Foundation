@@ -33,7 +33,7 @@ const Header = ({ section }) => {
     }
   };
   useEffect(() => {
-    const slideshow = () =>{setInterval(() => {setCount(prevCount => (prevCount + 1) % 5);}, 10000);}; slideshow();
+    const slideshow = () =>{setInterval(() => {setCount(prevCount => (prevCount + 1) % 5);}, 5000);}; slideshow();
     return () => clearInterval(slideshow);
   }, [])
   useEffect(() => {

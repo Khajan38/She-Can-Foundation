@@ -4,14 +4,9 @@ root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 if root_path not in sys.path:
     sys.path.append(root_path)
 
-import pymongo
-from dotenv import load_dotenv
 from flask import Blueprint, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
-from backend.dashboard import calculate_level
-load_dotenv()
-mongo_uri = os.getenv("MONGO_URI")
-if not mongo_uri: raise ValueError("MONGO_URI not set in environment variables")
+from backend.central import calculate_level, collection
 
 login_bp = Blueprint('login', __name__)
 logout_bp = Blueprint('logout', __name__)
@@ -26,12 +21,8 @@ def login():
     if not username or not password:
         return jsonify({'error': 'Missing required fields'}), 400
 
-    mongo_client = pymongo.MongoClient(mongo_uri)
-    db = mongo_client["She-Can-Foundation"]
-    collection = db["interns"]
     document = collection.find_one({"username": username})
     if document is None: collection.find_one({"email": username})
-    mongo_client.close()
     if document is None:
         return jsonify({"error": "User Not Found"}), 401
     elif not check_password_hash(document.get("password"), password):
@@ -46,20 +37,14 @@ def register():
     if not data.get("username"):
         print("Registration failed")
         return jsonify({'error': 'Registration failed or cancelled.'}), 401
-
-    mongo_client = pymongo.MongoClient(mongo_uri)
-    db = mongo_client["She-Can-Foundation"]
     username = data["username"]
     email = data["email"]
     phone = data["phone"]
     referral = data.get("referral_code")
     if not username or not email:
-        mongo_client.close()
         return jsonify({'error': 'Missing required fields'}), 400
-    collection = db["interns"]
 
     if collection.find_one({"$or": [{"username": username}, {"email": email}, {"phone": phone}]}):
-        mongo_client.close()
         return jsonify({"error": "User already exists with the same username, email, or phone"}), 409
 
     if referral:
@@ -79,5 +64,4 @@ def register():
     data["password"] = generate_password_hash(data["password"])
     data.pop("userType", None)
     collection.insert_one(data)
-    mongo_client.close()
     return jsonify({"message": "Registration Successful"}), 200
