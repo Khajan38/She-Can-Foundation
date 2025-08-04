@@ -46,17 +46,7 @@ const ProductsPage = () => {
     <div className="product-container">
       {rewards.map(product => (
         <div className="product-card" key={product.id}>
-          <img
-            src={
-              typeof product.img === 'string'
-                ? product.img
-                : product.img instanceof File
-                  ? URL.createObjectURL(product.img[0])
-                  : '/placeholder.jpg'
-            }
-            alt={product.title}
-            style={{ objectFit: 'cover' }}
-          />
+          <img src={ typeof product.img === 'string' ? product.img : product.img instanceof File ? URL.createObjectURL(product.img[0]) : '/placeholder.jpg' } alt={product.title} style={{ objectFit: 'cover' }} />
           <h3>{product.title}</h3>
           <p>Points: {product.points}</p>
           <button disabled={points < product.points}>Get the Goodie</button>

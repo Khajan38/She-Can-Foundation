@@ -5,6 +5,7 @@ if root_path not in sys.path:
     sys.path.append(root_path)
 
 import pymongo
+from pymongo import DESCENDING
 from dotenv import load_dotenv
 from flask import Blueprint, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -35,7 +36,7 @@ def getData():
     mongo_client.close()
     if not document:
         return jsonify({'error': 'User not found'}), 404
-    return jsonify(document)
+    return jsonify(document), 200
 
 @getData_bp.route('/getPoints', methods=['GET'])
 def getPoints():
@@ -50,4 +51,24 @@ def getPoints():
     mongo_client.close()
     if not document:
         return jsonify({'error': 'User not found'}), 404
-    return jsonify(document)
+    return jsonify(document), 200
+
+@getData_bp.route('/getLeaderboard', methods=['GET'])
+def getLeaderboard():
+    mongo_client = pymongo.MongoClient(mongo_uri)
+    db = mongo_client["She-Can-Foundation"]
+    collection = db["interns"]
+    try:
+        top_users_cursor = collection.find().sort("points", DESCENDING).limit(10)
+        top_users = list(top_users_cursor)
+        ranked_users = []
+        for index, user in enumerate(top_users):
+            ranked_users.append({
+                "rank": index + 1,
+                "name": user.get("username", "Unknown"),
+                "points": user.get("points", 0),
+                "level": user.get("level", 0)
+            })
+        return jsonify(ranked_users), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
